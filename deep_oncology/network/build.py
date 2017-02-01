@@ -56,7 +56,7 @@ class NetworkBuilder(object):
         self.network = fully_connected(self.network, num_units, 
                                         activation=activation)
         
-    def add_dropout(self, keep_prob): 
+    def add_dropout_layer(self, keep_prob): 
         """
 
         Args:
