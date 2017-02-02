@@ -1,3 +1,3 @@
-import load
-import plot
+from load import Loader
+from plot import Plotter
 

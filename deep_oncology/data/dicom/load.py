@@ -1,6 +1,5 @@
 import logging 
 import dicom
-import numpy as np
 from glob import glob
 
 
