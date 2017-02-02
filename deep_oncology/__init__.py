@@ -1,3 +1,2 @@
-import dicom
-import preprocessing
+import data
 import network
