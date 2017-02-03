@@ -6,5 +6,5 @@
 ____/ \___|\___| .__/ \___/ _|  _|\___|\___/ _|\___/ \__, |\__, |
                 _|                                   |___/ ____/ 
 ```
-_Lung cancer detection driven by deep learning_ 
+_(Data Science Bowl 2017)[https://kaggle.com/c/data-science-bowl-2017]_
 
