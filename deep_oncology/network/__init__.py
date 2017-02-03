@@ -1,1 +1,2 @@
-from deep_oncology.network.build import NetworkBuilder
+import build
+import train

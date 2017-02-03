@@ -1,4 +1,4 @@
-from resample import Resampler
-from convert import Converter
-from segment_lungs import LungSegmenter
-from normalize import Normalizer
+import convert
+import normalize
+import resample
+import segment_lungs

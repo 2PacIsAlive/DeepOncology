@@ -1,6 +1,7 @@
 import logging
 import pandas as pd
 
+
 class Parser(object):
     """Parse that b
 
@@ -10,6 +11,7 @@ class Parser(object):
     """
     logging.basicConfig(level=logging.DEBUG)
     log = logging.getLogger(__name__)
+    csvfile = str()
 
     def __init__(self, csvfile):
         """Initialize a parser b
