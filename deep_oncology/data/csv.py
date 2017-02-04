@@ -7,22 +7,15 @@ class Parser(object):
 
     Attributes:
         log (logging.Logger): The logger for this module.
-        csvfile (str): The csv file to parse.
     """
     logging.basicConfig(level=logging.DEBUG)
     log = logging.getLogger(__name__)
-    csvfile = str()
 
-    def __init__(self, csvfile):
-        """Initialize a parser b
-
-        Args: 
-            csvfile (str): The csv file to parse.
-        """
-        self.csvfile = csvfile
-
-    def parse(self):
+    def parse(self, csvfile):
         """
 
+        Generates:
+            list of tuples: First item is index, second item is pandas.dataframe.
         """
-        return pd.read_csv(self.csvfile)
+        return pd.read_csv(csvfile).iterrows()
+
