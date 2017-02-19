@@ -1,3 +1,4 @@
 comp_data/
 test_data/
 *.pyc
+__pycahhe__/

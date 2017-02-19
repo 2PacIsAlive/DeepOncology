@@ -1,0 +1,31 @@
+{% import "head.html" as head %}
+{% import "navbar.html" as navbar %}
+{% import "events.html" as events %}
+{% import "network.html" as network %}
+<!DOCTYPE html>
+<html lang="en">
+	{{ head.head() }}
+	<body>
+        {{ navbar.navbar() }}
+        <div class="uk-section">
+            <div class="uk-container uk-container-small">
+                <h2 class="uk-heading-line uk-text-center"><span>Let's fight lung cancer, <strong>together</strong>.</span></h2>
+                <button id="show-network-builder" class="uk-button uk-button-primary uk-width-1-1 uk-margin-small-bottom">Get started</button>
+                {{ events.on_click_show("#show-network-builder", "#network-builder") }}
+            </div>
+        </div>
+        <div id="network-builder" class="uk-section uk-section-muted uk-preserve-color">
+            <div class="uk-container">
+                {{ network.builder() }}
+            </div>
+        </div>
+        <div class="uk-section uk-section-secondary">
+            <div class="uk-container uk-container-small">
+                <blockquote cite="">
+                    <p class="uk-margin-small-bottom">Once you choose hope, anything’s possible.</p>
+                    <footer><cite>Christopher Reeve</cite></footer>
+                </blockquote>
+            </div>
+        </div>
+    </body>
+</html>

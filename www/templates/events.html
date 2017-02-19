@@ -1,0 +1,24 @@
+{% macro on_click_show(button_id, div_id) -%}
+	<script>
+		$(document).ready(function() {
+			$("{{div_id}}").hide();
+			$("{{button_id}}").click(function() {
+				$("{{div_id}}").show().fadeIn();
+			});
+		});
+	</script>
+{%- endmacro %}
+{% macro on_click_get_group_contents(button_id, group_id) -%}
+	<script>
+		$(document).ready(function() {
+			$("{{button_id}}").click(function() {
+				layers = [];
+				group_contents = $("{{group_id}}").children()
+				$.each(group_contents, function(key, value) {
+					layers.push(value.innerText.toLowerCase().replace(/\ /g, "_"));
+				});
+				console.log(layers);
+			});
+		});
+	</script>
+{%- endmacro %}

@@ -1,0 +1,222 @@
+{% import "events.html" as events %}
+{% macro builder() -%}
+	<p class="uk-text-center uk-text-meta">
+		Add new layers on the left and drag them into your network on the right.
+	</p>
+	<div class="uk-child-width-1-2@s" uk-grid>
+		<div>
+			<h4 class="uk-text-center">Layers</h4>
+			<div id="layer-group" uk-sortable="group: sortable-group">
+
+			</div>
+		</div>
+		<div>
+			<h4 class="uk-text-center">Network</h4>
+			<div id="network-group" uk-sortable="group: sortable-group">
+
+			</div>
+		</div>
+	</div>
+	<hr class="uk-divider-icon">
+	<div class="uk-child-width-expand@s uk-text-center" uk-grid>
+		<div class="uk-inline">
+			<button id="add-layer" class="uk-button uk-button-secondary" type="button">
+				<span class="uk-margin-small-center" uk-icon="icon: plus">Add layer    </span>
+			</button>
+			<div uk-dropdown>
+				<ul class="uk-nav uk-dropdown-nav">
+					<li class="uk-nav-header">Core</li>
+					<li><a id="add-fully-connected-layer" href="">Fully Connected</a></li>
+					<li><a id="add-dropout-layer" href="">Dropout</a></li>
+					<li class="uk-nav-divider"></li>
+					<li class="uk-nav-header">Convolutional</li>
+					<li><a id="add-3d-conv-layer" href="">Convolution 3d</a></li>
+					<li><a id="add-max-pool-layer" href="">Max Pooling 3d</a></li>
+					<li class="uk-nav-divider"></li>
+					<li class="uk-nav-header">Estimator</li>
+					<li><a id="add-regression-layer" href="">Regression</a></li>
+				</ul>
+			</div>
+			<script>
+				$(document).ready(function() {
+					var group_contents;
+					var layers;
+					var activation_functions = [
+						"linear",
+						"tanh",
+						"sigmoid",
+						"softmax",
+						"softplus",
+						"softsign",
+						"relu",
+						"relu6",
+						"leakyrelu",
+						"prelu",
+						"elu"
+					]
+					var optimizers = [
+						"stochastic gradient descent",
+						"rmsprop",
+						"adam",
+						"momentum",
+						"adagrad",
+						"ftrl",
+						"adadelta"
+					]
+					var loss_functions = [
+						"softmax categorical crossentropy",
+						"categorical crossentropy",
+						"binary crossentropy",
+						"mean square loss",
+						"hinge loss",
+						"roc auc score",
+						"weak crossentropy 2d"
+					]
+					var config = {
+						fully_connected: {
+							"Units": {
+								type: "int",
+								help: "The number of units in the layer."
+							},
+							"Activation": {
+								type: "choice",
+								help: "The activation function to use.",
+								choices: activation_functions
+							}
+						},
+						dropout: {
+							"Keep Probability": {
+								type: "float",
+								help: "The probablility that each element is kept."
+							}
+						},
+						convolution_3d: {
+							"Filters": {
+								type: "int",
+								help: "The number of convolutional filters to use."
+							},
+							"Filter Size": {
+								type: "int",
+								help: "The size of each filter."
+							},
+							"Activation": {
+								type: "choice",
+								help: "The activation function to use.",
+								choices: activation_functions
+							}
+						},
+						max_pooling_3d: {
+							"Kernel Size": {
+								type: "int",
+								help: "The pooling kernel size."
+							},
+							"Strides": {
+								type: "int",
+								help: "The strides of the convolution."
+							}
+						},
+						regression: {
+							"Optimizer": {
+								type: "choice",
+								help: "The optimizer to use.",
+								choices: optimizers
+							},
+							"Loss Function": {
+								type: "choice",
+								help: "The loss function used by the optimizer.",
+								choices: loss_functions
+							},
+							"Learning Rate": {
+								type: "float",
+								help: "The learning rate used by the optimizer."
+							}
+						}
+					}
+					function add_layer(a)
+						{
+							var card_prefix = `
+								<div class="uk-margin">
+									<div class="uk-card uk-card-default uk-card-body uk-card-hover uk-card-small">
+							`
+							var layer_config = config[a.text().toLowerCase().replace(/\ /g, "_")];
+							var options = {};
+							var option_type;
+							var option_prefix;
+							var choice_prefix;
+							var choice_body;
+							for (option in layer_config) {
+								option_type = layer_config[option].type;
+								option_prefix = `
+									<div class="uk-margin">
+										<p class="uk-text-meta uk-margin-small">` + option + `</p>
+								`
+								if (option_type == "int") {
+									options[option] = option_prefix + `
+			 								<input class="uk-input" type="number" placeholder="" title="` + layer_config[option].help + `" uk-tooltip="delay: 500; pos: top-right">
+										</div>
+									`
+								}
+								else if (option_type == "float") {
+									options[option] = option_prefix + `
+											<input class="uk-input" type="number" step="0.01" placeholder="" title="` + layer_config[option].help + `" uk-tooltip="delay: 500; pos: top-right">
+										</div>
+									`
+								}
+								else if (option_type == "str") {
+									options[option] = option_prefix + `
+											<input class="uk-input" type="text" placeholder="" title="` + layer_config[option].help + `" uk-tooltip="delay: 500; pos: top-right">
+										</div>
+									`
+								}
+								else if (option_type == "choice") {
+									choice_prefix = option_prefix + `
+										<select class="uk-select" title="` + layer_config[option].help + `" uk-tooltip="delay: 500; pos: top-right">
+									`
+									choice_body = "";
+									for (var i=0; i<layer_config[option].choices.length; i++) {
+										choice_body += `
+											<option>` + layer_config[option].choices[i] + `</option>
+										`
+									}
+									options[option] = choice_prefix + choice_body + `
+										</select>
+									`
+								}
+							}
+							var help_prefix = $.trim(`
+								<hr>
+								<form>
+									<fieldset class="uk-fieldset">
+							`)
+							var help_body;
+							for (option in options) {
+								help_body += $.trim(options[option])
+							}
+							var help_suffix = `
+									</fieldset>
+								</form>
+							`
+							var help = (help_prefix + help_body + help_suffix).replace(/undefined/g, "");
+							var text_with_handle = `<span class="uk-sortable-handle uk-margin-small-right" uk-icon="icon: table"></span>` + a.text()
+							var card = card_prefix + text_with_handle + help + `</div></div>`
+							$("#layer-group").append(card);
+							return false;
+						}
+					{% for layer_id in ["#add-fully-connected-layer", "#add-dropout-layer",
+										"#add-3d-conv-layer", "#add-max-pool-layer",
+										"#add-regression-layer"] %}
+						$("{{layer_id}}").click(function() {
+							return add_layer($(this));
+						});
+					{% endfor %}
+				});
+			</script>
+		</div>
+		<div class="uk-inline">
+			<button id="build-network" class="uk-button uk-button-primary" type="button">
+				<span class="uk-margin-small-center" uk-icon="icon: check">Build network    </span>
+			</button>
+		</div>
+		{{ events.on_click_get_group_contents("#build-network", "#network-group") }}
+	</div>
+{%- endmacro %}
