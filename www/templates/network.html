@@ -152,25 +152,25 @@
 								`
 								if (option_type == "int") {
 									options[option] = option_prefix + `
-			 								<input class="uk-input" type="number" placeholder="" title="` + layer_config[option].help + `" uk-tooltip="delay: 500; pos: top-right">
+			 								<input class="uk-input" name=` + option + ` type="number" placeholder="" title="` + layer_config[option].help + `" uk-tooltip="delay: 500; pos: top-right">
 										</div>
 									`
 								}
 								else if (option_type == "float") {
 									options[option] = option_prefix + `
-											<input class="uk-input" type="number" step="0.01" placeholder="" title="` + layer_config[option].help + `" uk-tooltip="delay: 500; pos: top-right">
+											<input class="uk-input" name=` + option + ` type="number" step="0.01" placeholder="" title="` + layer_config[option].help + `" uk-tooltip="delay: 500; pos: top-right">
 										</div>
 									`
 								}
 								else if (option_type == "str") {
 									options[option] = option_prefix + `
-											<input class="uk-input" type="text" placeholder="" title="` + layer_config[option].help + `" uk-tooltip="delay: 500; pos: top-right">
+											<input class="uk-input" name=` + option + ` type="text" placeholder="" title="` + layer_config[option].help + `" uk-tooltip="delay: 500; pos: top-right">
 										</div>
 									`
 								}
 								else if (option_type == "choice") {
 									choice_prefix = option_prefix + `
-										<select class="uk-select" title="` + layer_config[option].help + `" uk-tooltip="delay: 500; pos: top-right">
+										<select class="uk-select" name=` + option + ` title="` + layer_config[option].help + `" uk-tooltip="delay: 500; pos: top-right">
 									`
 									choice_body = "";
 									for (var i=0; i<layer_config[option].choices.length; i++) {

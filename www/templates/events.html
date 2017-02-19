@@ -15,9 +15,23 @@
 				layers = [];
 				group_contents = $("{{group_id}}").children()
 				$.each(group_contents, function(key, value) {
-					layers.push(value.innerText.toLowerCase().replace(/\ /g, "_"));
+					layers.push({
+						type: $($(value).children()[0].childNodes)[2].data.toLowerCase().replace(/\ /g, "_"),
+						options: $($($(value).children()[0]).children()[2]).serializeArray()
+					});
 				});
-				console.log(layers);
+				$.ajax({
+					method: "POST",
+					dataType: "json",
+					contentType: "application/json",
+        			url: "/build",
+        			data: JSON.stringify(layers),
+        			statusCode: {
+						400: function(data) {
+							console.log(data.responseJson);
+						}
+					}
+        		});
 			});
 		});
 	</script>
