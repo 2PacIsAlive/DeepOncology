@@ -27,8 +27,22 @@
         			url: "/build",
         			data: JSON.stringify(layers),
         			statusCode: {
+						200: function(data) {
+							console.log(data)
+							UIkit.notification({
+								message: data.message,
+								status: 'success',
+								pos: 'top-right',
+								timeout: 5000
+							});
+						},
 						400: function(data) {
-							console.log(data.responseJson);
+							UIkit.notification({
+								message: data.responseJSON.message,
+								status: 'danger',
+								pos: 'top-right',
+								timeout: 5000
+							});
 						}
 					}
         		});
