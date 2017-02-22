@@ -7,7 +7,7 @@ def build():
     if request.json is None or len(request.json) < 1:
         return jsonify(
             type="error",
-            message="Must provide a json network config in the request."
+            message="Must include at least one layer."
         ), 400
     else:
         network_config = request.json

@@ -83,7 +83,7 @@ class NetworkBuilder(object):
             max_checkpoints (int):
             tensorboard_verbose (int):
 
-        Returns
+        Returns:
             tflearn.DNN: A tflearn DNN object that can be used as an estimator. 
         """
         return DNN(self.network, checkpoint_path=checkpoint_path,

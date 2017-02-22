@@ -1,7 +1,12 @@
 {% macro navbar() -%}
-  	<nav class="uk-navbar-container uk-navbar-transparent" uk-navbar>
+  	<nav class="uk-navbar-container uk-dark" uk-navbar>
         <div class="uk-navbar-left">
             <a class="uk-navbar-item uk-logo" href="/"><strong>Deep</strong> Oncology</a>
+        </div>
+        <div class="uk-navbar-right">
+            <a class="uk-navbar-item uk-text-uppercase" href="/build">build</a>
+            <a class="uk-navbar-item uk-text-uppercase" href="/train">train</a>
+            <a class="uk-navbar-item uk-text-uppercase" href="/contribute">contribute</a>
         </div>
     </nav>
 {%- endmacro %}

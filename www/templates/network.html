@@ -1,8 +1,25 @@
 {% import "events.html" as events %}
 {% macro builder() -%}
-	<p class="uk-text-center uk-text-meta">
-		Add new layers on the left and drag them into your network on the right.
-	</p>
+	<form>
+		<fieldset class="uk-fieldset">
+			<legend id="network-legend" class="uk-legend"></legend>
+			<div class="uk-margin">
+				<label class="uk-form-label" for="form-stacked-text">Name</label>
+				<div class="uk-form-controls">
+					<input id="network-name" class="uk-input" id="form-stacked-text" type="text" placeholder="">
+				</div>
+			</div>
+			<script>
+				$(document).ready(function() {
+					$("#network-name").keyup(function() {
+						console.log($("#network-name").val());
+						$("#network-legend").innerHtml = $("#network-name").val();
+					});
+				});
+			</script>
+		</fieldset>
+	</form>
+	<hr>
 	<div class="uk-child-width-1-2@s" uk-grid>
 		<div>
 			<h4 class="uk-text-center">Layers</h4>
@@ -199,7 +216,7 @@
 							var help = (help_prefix + help_body + help_suffix).replace(/undefined/g, "");
 							var text_with_handle = `<span class="uk-sortable-handle uk-margin-small-right" uk-icon="icon: table"></span>` + a.text()
 							var card = card_prefix + text_with_handle + help + `</div></div>`
-							$("#layer-group").append(card);
+							$("#layer-group").append(card).hide().fadeIn("slow");
 							return false;
 						}
 					{% for layer_id in ["#add-fully-connected-layer", "#add-dropout-layer",

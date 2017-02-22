@@ -1,0 +1,32 @@
+{% import "head.html" as head %}
+{% import "navbar.html" as navbar %}
+{% import "events.html" as events %}
+{% import "network.html" as network %}
+<!DOCTYPE html>
+<html lang="en">
+	{{ head.head() }}
+	<body>
+        {{ navbar.navbar() }}
+        <div class="uk-section">
+            <div class="uk-container uk-container-small">
+                <h2 class="uk-heading-line uk-text-right"><span>Train <strong>your own</strong> neural network.</span></h2>
+                <div class="uk-text-justify">
+                    <p>{{network_name}}</p>
+                </div>
+                <hr>
+                <button id="show-network-builder" class="uk-button uk-button-primary uk-width-1-1 uk-margin-small-bottom">
+                    Build a network
+                </button>
+                {{ events.on_click_toggle("#show-network-builder", "#network-builder") }}
+            </div>
+        </div>
+        <div class="uk-section uk-section-xsmall uk-section-secondary">
+            <div class="uk-container uk-container-small">
+                <blockquote cite="">
+                    <p class="uk-margin-small-bottom"><small>I can answer the question, but am I bright enough to ask it?</small></p>
+                    <footer><small><cite><a href="https://twitter.com/edge">John Brockman</a></cite></small></footer>
+                </blockquote>
+            </div>
+        </div>
+    </body>
+</html>

@@ -1,9 +1,9 @@
-{% macro on_click_show(button_id, div_id) -%}
+{% macro on_click_toggle(button_id, div_id) -%}
 	<script>
 		$(document).ready(function() {
 			$("{{div_id}}").hide();
 			$("{{button_id}}").click(function() {
-				$("{{div_id}}").show().fadeIn();
+				$("{{div_id}}").slideToggle("slow");
 			});
 		});
 	</script>
@@ -28,13 +28,13 @@
         			data: JSON.stringify(layers),
         			statusCode: {
 						200: function(data) {
-							console.log(data)
 							UIkit.notification({
 								message: data.message,
 								status: 'success',
 								pos: 'top-right',
 								timeout: 5000
 							});
+							$('#trainer-button-section').slideDown("slow");
 						},
 						400: function(data) {
 							UIkit.notification({
