@@ -11,3 +11,4 @@ class NetworkConfig(object):
     log = logging.getLogger(__name__)
 
     def __init__(self, config):
+		pass

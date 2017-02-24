@@ -1,5 +1,5 @@
 import logging
-import pylab
+#import pylab
 import matplotlib.pyplot as plt
 from skimage import measure
 from mpl_toolkits.mplot3d.art3d import Poly3DCollection
@@ -35,7 +35,7 @@ class Plotter(object):
 
 def plot(dataset):
     log.info("plotting {}".format(dataset.PatientsName))
-    pylab.imshow(dataset.pixel_array, cmap=pylab.cm.bone)
+    #pylab.imshow(dataset.pixel_array, cmap=pylab.cm.bone)
     
 def save(dataset):
     log.info("saving {}".format(dataset.PatientsName))
