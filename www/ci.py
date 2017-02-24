@@ -3,8 +3,9 @@ from flask import request, jsonify
 import hmac
 import hashlib
 
+# TODO use subdomain="ci"
 
-@app.route('/ci/webhook', methods=['POST'])
+@app.route('/webhook', methods=['POST'])
 def github_ci_webhook():
     """Github commit hook.
 
@@ -23,7 +24,7 @@ def github_ci_webhook():
             signature (string): The request X-Hub-Signature header.
 
         Returns:
-            bool: A boolean indicating whether or not the request signature is valid
+            bool: A boolean indicating whether or not the request signature is valid.
         """
         mac = hmac.new(app.config['GITHUB_SECRET'], msg=data, digestmod=hashlib.sha1)
         return hmac.compare_digest('sha1=' + mac.hexdigest(), signature.encode('utf-8'))

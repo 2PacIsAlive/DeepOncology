@@ -2,6 +2,8 @@ from www import app
 from flask import request, jsonify
 from datetime import date
 
+# TODO use subdomain="api"
+
 @app.route('/build', methods=["POST"])
 def build():
     if request.json is None or len(request.json) < 1:
