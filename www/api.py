@@ -4,7 +4,7 @@ from datetime import date
 
 # TODO use subdomain="api"
 
-@app.route('/build', methods=["POST"])
+@app.route('/build', methods=["POST"], subdomain="api")
 def build():
     if request.json is None or len(request.json) < 1:
         return jsonify(
