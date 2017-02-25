@@ -11,6 +11,7 @@ class NetworkBuilder(object):
     Attributes: 
         log (logging.Logger): The logger for this module.
         network (tflearn.Network): #TODO fixme
+        funcmap (dict): A mapping from config strings to NetworkBuilder functions.
     """
     logging.basicConfig(level=logging.INFO)
     log = logging.getLogger(__name__)
@@ -21,20 +22,27 @@ class NetworkBuilder(object):
         Args: 
             shape (list): Shape of the input data.
         """
+        self.funcmap = {
+            "fully_connected": self.add_fully_connected_layer,
+            "dropout": self.add_dropout_layer,
+            "convolution_3d": self.add_conv_3d_layer,
+            "max_pooling_3d": self.add_max_pool_3d_layer,
+            "regression": self.add_regression_estimator
+        }
+
         self.network = input_data(shape=shape)
 
-    def add_conv_3d_layers(self, num_filters, filter_size, activation, num_layers=1):
+    def add_conv_3d_layer(self, options):
         """
     
         Args:
+            options (deep_networks.network.config.Conv3DOptions): The parameters for this layer.
             num_filters (int): Number of convolutional filters to use.
             filter_size (int): Size of each filter.
             activation (str): Activation function to use.
-            num_layers (int): The number of 3d convolutional layers to add.
         """
-        for i in range(num_layers):
-            self.network = conv_3d(self.network, num_filters, filter_size, 
-                                    activation=activation)
+        self.network = conv_3d(self.network, options.num_filters, options.filter_size,
+                                activation=options.activation)
 
     def add_max_pool_3d_layer(self, kernel_size, strides): 
         """
@@ -74,6 +82,15 @@ class NetworkBuilder(object):
         """
         self.network = regression(self.network, optimizer=optimizer,
                                     loss_fcn=loss_fcn, learning_rate=learning_rate)
+
+    def build_from_config(self, config):
+        """Construct a network from a config object.
+
+        Args:
+            config (deep_networks.network.config): A config object.
+        """
+        for layer in config:
+            self.funcmap[layer.type]](layer.options)
 
     def build(self, checkpoint_path, max_checkpoints, tensorboard_verbose):
         """

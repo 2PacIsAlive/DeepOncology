@@ -1,26 +1,19 @@
 {% import "events.html" as events %}
 {% macro builder() -%}
-	<form>
-		<fieldset class="uk-fieldset">
-			<legend id="network-legend" class="uk-legend">samp</legend>
-			<div class="uk-margin">
-				<label class="uk-form-label" for="form-stacked-text">Name</label>
-				<div class="uk-form-controls">
-					<input id="network-name" class="uk-input" id="form-stacked-text" type="text" placeholder="">
+	<div class="uk-container uk-container-small">
+		<form>
+			<fieldset class="uk-fieldset">
+				<h1 id="network-legend" class="uk-legend"></h1>
+				<div class="uk-margin">
+					<label class="uk-form-label" for="network-name">Network Name:</label>
+					<div class="uk-form-controls">
+						<input id="network-name" class="uk-input uk-form-width-medium" type="text" placeholder="">
+					</div>
 				</div>
-			</div>
-			<script>
-				$(document).ready(function() {
-					$("#network-name").keyup(function() {
-						console.log($("#network-name").val());
-						console.log($("#network-legend"))
-						$("#network-legend").innerHtml = $("#network-name").val();
-					});
-				});
-			</script>
-		</fieldset>
-	</form>
-	<hr>
+				<hr>
+			</fieldset>
+		</form>
+	</div>
 	<div class="uk-child-width-1-2@s" uk-grid>
 		<div>
 			<h4 class="uk-text-center">Layers</h4>
