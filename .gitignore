@@ -1,5 +1,6 @@
 comp_data/
 test_data/
 *.pyc
+*.DS_Store
 __pycache__/
 .idea/

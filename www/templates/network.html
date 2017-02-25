@@ -2,7 +2,7 @@
 {% macro builder() -%}
 	<form>
 		<fieldset class="uk-fieldset">
-			<legend id="network-legend" class="uk-legend"></legend>
+			<legend id="network-legend" class="uk-legend">samp</legend>
 			<div class="uk-margin">
 				<label class="uk-form-label" for="form-stacked-text">Name</label>
 				<div class="uk-form-controls">
@@ -13,6 +13,7 @@
 				$(document).ready(function() {
 					$("#network-name").keyup(function() {
 						console.log($("#network-name").val());
+						console.log($("#network-legend"))
 						$("#network-legend").innerHtml = $("#network-name").val();
 					});
 				});

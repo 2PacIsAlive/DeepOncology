@@ -9,7 +9,32 @@
         {{ navbar.navbar() }}
         <div class="uk-section">
             <div class="uk-container uk-container-small">
-                <h2 class="uk-heading-line uk-text-center"><span>Let's fight lung cancer, <strong>together</strong>.</span></h2>
+                <script>
+                  $(function(){
+                      $('.typed-cursor').remove();
+                      $(".element").typed({
+                        strings: [
+                            "made <strong>easier</strong>.",
+                            "but <strong>more fun</strong>.",
+                            "with <strong>less work</strong>.",
+                            "made <strong>sexier</strong>.",
+                            "with <strong>more abstraction</strong>."
+                        ],
+                        typeSpeed: 75,
+                        backSpeed: 20,
+                        loop: true,
+                        startDelay: 0,
+                        backDelay: 1500,
+                        showCursor: false,
+                        shuffle: true
+                      });
+                  });
+                </script>
+                <!--<h2 class="uk-heading-line uk-text-center"><span>Deep learning,<br> <strong><div class="element"></div></strong></span></h2>-->
+                <div class="uk-padding uk-container uk-container-small">
+                    <h2 class="uk-display-inline-block uk-text-center">Deep learning, <span class="element"></span></h2>
+                </div>
+                <br>
                 <div class="uk-text-justify">
                     <p>Competitions like the <a href="https://www.kaggle.com/c/data-science-bowl-2017/data">Data Science Bowl 2017</a> and <a href="https://luna16.grand-challenge.org/">LUNA16</a> are empowering the community to aid in the fight against lung cancer in ways like never before.</p>
 
