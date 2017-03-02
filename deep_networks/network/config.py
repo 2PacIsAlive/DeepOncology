@@ -20,6 +20,20 @@ class NetworkConfig(object):
         except ValueError as ve:
             raise ve
 
+    def build_from_config(self, config):
+        """Construct with a NetworkConfig from a dict based config object.
+
+        Constructs NetworkConfigValidator to perform validation before building.
+
+        Args:
+            config (list): A list of dicts containing a representation of a network (TODO how to define?)
+
+        """
+        try:
+            self.NetworkConfigValidator(config)
+        except ValueError as ve:
+            raise ve
+
     class LayerConfig(object):
         """A single layer configuration.
 
@@ -56,7 +70,7 @@ class NetworkConfig(object):
         """
         errors = list()
         messages = {
-            "not_list_of_layers": "Config should contain a list of layer definitions, but was a {}."
+            "not_list_of_layers": "The network config should contain a list of layer definitions, but was a {}."
         }
 
         def __init__(self, config):
@@ -94,19 +108,4 @@ class NetworkConfig(object):
             """
             # TODO!!!
             return True
-
-    def build_from_config(self, config):
-        """Construct with a NetworkConfig from a dict based config object.
-
-        Constructs NetworkConfigValidator to perform validation before building.
-
-        Args:
-            config (list): A list of dicts containing a representation of a network (TODO how to define?)
-
-        """
-        try:
-            self.NetworkConfigValidator(config)
-        except ValueError as ve:
-            raise ve
-
 

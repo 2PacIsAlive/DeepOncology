@@ -1,7 +1,6 @@
 {% import "head.html" as head %}
 {% import "navbar.html" as navbar %}
 {% import "events.html" as events %}
-{% import "network.html" as network %}
 <!DOCTYPE html>
 <html lang="en">
 	{{ head.head() }}
@@ -9,9 +8,9 @@
         {{ navbar.navbar() }}
         <div class="uk-section">
             <div class="uk-container uk-container-small">
-                <h2 class="uk-heading-line uk-text-right"><span>Build <strong>your own</strong> neural network.</span></h2>
+                <h2 class="uk-heading-line uk-text-right"><span>TODO <strong>todo</strong> todo.</span></h2>
                 <div class="uk-text-justify">
-                    <p>instructions here yo</p>
+                    <p>TODO some text about hacking on deep_networks</p>
                 </div>
                 <hr>
                 <button id="show-network-builder" class="uk-button uk-button-primary uk-width-1-1 uk-margin-small-bottom">
@@ -20,24 +19,11 @@
                 {{ events.on_click_toggle("#show-network-builder", "#network-builder") }}
             </div>
         </div>
-        <div id="network-builder" class="uk-section uk-section-muted uk-preserve-color">
-            <div class="uk-container">
-                {{ network.builder() }}
-            </div>
-        </div>
-        <div id="trainer-button-section" class="uk-section uk-section-primary">
-            <div class="uk-container uk-container-small">
-                <button id="trainer-button" class="uk-button uk-button-default uk-width-1-1" onclick="window.location.href='/train?network='+$('#network-name').val()">Train your network</button>
-            </div>
-        </div>
-        <script>
-            $("#trainer-button-section").hide();
-        </script>
         <div class="uk-section uk-section-xsmall uk-section-secondary">
             <div class="uk-container uk-container-small">
                 <blockquote cite="">
-                    <p class="uk-margin-small-bottom"><small>TODO nice quote</small></p>
-                    <footer><small><cite><a href="">TODO some guy/gal</a></cite></small></footer>
+                    <p class="uk-margin-small-bottom"><small>I can answer the question, but am I bright enough to ask it?</small></p>
+                    <footer><small><cite><a href="https://twitter.com/edge">John Brockman</a></cite></small></footer>
                 </blockquote>
                 <div class="uk-text-center">
                     <a href="#" uk-totop uk-scroll></a>

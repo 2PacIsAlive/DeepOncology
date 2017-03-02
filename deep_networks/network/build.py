@@ -4,6 +4,7 @@ from tflearn.layers.core import input_data, dropout, fully_connected
 from tflearn.layers.conv import conv_3d, max_pool_3d
 from tflearn.layers.estimator import regression
 
+from deep_networks.network.config import NetworkConfig
 
 class NetworkBuilder(object):
     """
@@ -54,7 +55,7 @@ class NetworkBuilder(object):
         self.network = max_pool_3d(self.network, kernel_size, 
                                     strides=strides)
     
-    def add_fully_connected_layer(self, num_units):
+    def add_fully_connected_layer(self, num_units, activation):
         """
 
         Args:
@@ -89,8 +90,8 @@ class NetworkBuilder(object):
         Args:
             config (deep_networks.network.config): A config object.
         """
-        for layer in config:
-            self.funcmap[layer.type]](layer.options)
+        for layer in config.layers:
+            self.funcmap[layer.type](layer.options)
 
     def build(self, checkpoint_path, max_checkpoints, tensorboard_verbose):
         """
